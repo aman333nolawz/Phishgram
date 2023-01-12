@@ -1,9 +1,15 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 
+connected_ips = []
 
 class Server(BaseHTTPRequestHandler):
     def do_GET(self):
+        ip = self.client_address[0]
+        if ip not in connected_ips:
+            connected_ips.append(ip)
+            print("[-] Got connection from", ip)
+            print()
         if self.path == "/":
             self.path = "/index.html"
         try:
