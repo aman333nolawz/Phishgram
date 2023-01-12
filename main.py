@@ -45,5 +45,5 @@ class Server(BaseHTTPRequestHandler):
 
 PORT = 8000
 with socketserver.TCPServer(("", PORT), Server) as httpd:
-    print("Serving at port:", PORT)
+    print("[-] Serving at port:", PORT)
     httpd.serve_forever()
