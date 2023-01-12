@@ -1,5 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
+import socketserver
 
 connected_ips = []
 
@@ -42,5 +43,7 @@ class Server(BaseHTTPRequestHandler):
         return
 
 
-httpd = HTTPServer(("0.0.0.0", 8000), Server)
-httpd.serve_forever()
+PORT = 8000
+with socketserver.TCPServer(("", PORT), Server) as httpd:
+    print("Serving at port:", PORT)
+    httpd.serve_forever()
